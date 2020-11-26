@@ -1006,3 +1006,5 @@ bindsym control+mod1+o exec --no-startup-id ~/.config/i3/scripts/picom-toggle.sh
 
 # get the mouse out of the way with unclutter
 #exec --no-startup-id unclutter
+
+bindsym $mod+control+f exec nemo

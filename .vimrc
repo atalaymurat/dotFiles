@@ -29,6 +29,8 @@ Plug 'junegunn/fzf'
 Plug 'sollidsnake/vterm'
 Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
+Plug 'mattn/emmet-vim'
+Plug 'prettier/vim-prettier'
 
 call plug#end()
 
@@ -44,6 +46,11 @@ noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
 noremap <silent> <leader><leader> :FZF<CR>
 """"""""""""""""""""""""""""""
+let g:user_emmet_leader_key=","
+
+"COC Navigate with tab
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 let g:auto_sava = 0
 let g:auto_save_write_all_buffers = 1
