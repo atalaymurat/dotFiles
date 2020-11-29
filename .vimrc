@@ -37,8 +37,13 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'prettier/vim-prettier'
 Plug 'romainl/vim-cool' "disables search highlights
+Plug 'tomasiser/vim-code-dark' "VS CODE THEME COLORS
 
 call plug#end()
+
+""THEME SETTINGS
+set background=dark
+colorscheme codedark
 
 ""KEY MAPPING
 noremap <SPACE> <Nop>
@@ -50,9 +55,21 @@ noremap <silent> <C-Left> :vertical resize +3<CR>
 noremap <silent> <C-Right> :vertical resize -3<CR>
 noremap <silent> <C-Up> :resize +3<CR>
 noremap <silent> <C-Down> :resize -3<CR>
-noremap <silent> <leader><leader> :FZF<CR>
-""""""""""""""""""""""""""""""
+noremap <silent> <leader><SPACE> :FZF<CR>
+
+""EMMET SETTINGS""""""""""""""""""""""""""""
 let g:user_emmet_leader_key=","
+let g:user_emmet_settings = {
+	\ 'javascript.jsx' : {
+		\		'extends' : 'jsx',
+  	\ },
+	\}
+""FZF SETTINGS"""""""""""""""""""""""""""""""
+let g:fzf_action = {
+	\ 'ctrl-i': 'split',
+	\ 'ctrl-t': 'tabedit',
+	\ 'ctrl-s': 'vsplit',
+	\ }
 
 let g:auto_save = 0
 let g:auto_save_write_all_buffers = 1
@@ -60,6 +77,10 @@ let NERDTreeMinimalUI = 1
 let NERDTreeShowHidden = 1
 let NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeIgnore = ['^node_modules$']
+
+""PRETTIER Settings""""""""""""""""""""""""""""
+let g:prettier#quickfix_auto_focus = 0
+let g:prettier#autoformat = 0
 
 "Persistent_undo feature.
 if has('persistent_undo')

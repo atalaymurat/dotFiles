@@ -71,7 +71,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git node ruby nvm)
+plugins=(git node ruby nvm fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -303,12 +303,13 @@ ex ()
 neofetch
 
 
+#FZF ==========================================
 export FZF_DEFAULT_COMMAND='fd -H --color=never'
-export FZF_
-CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd -H --type d . --color=never'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd -H --type d . $HOME --color=never'
+# space space short key for fzf vim
+# bindkey -s '  ' 'vim $(fzf)\n'
 
-bindkey -s '  ' 'vim $(fzf)\n'
 #SSH AGENT START
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
     ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
