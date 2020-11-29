@@ -3,15 +3,20 @@ set noswapfile
 set nobackup
 set nowb
 
-set ignorecase
-set smartcase
 set shiftwidth=2
 set tabstop=2
+set cursorline
 
 set splitbelow splitright
+set showcmd "show pressed keys
+set textwidth=100 "set lines to wrap (number of cols)
 
-"SETTING MOUSE FUNCTIONALITY ON VIM
-set mouse=nicr
+"Search Settings
+set hlsearch "highlight all search results
+set smartcase
+set ignorecase
+set incsearch
+let g:CoolTotalMatches = 1 "Show number of matches in cli
 
 "Removes | pipes 
 set fillchars+=vert:\ 
@@ -31,6 +36,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'frazrepo/vim-rainbow'
 Plug 'mattn/emmet-vim'
 Plug 'prettier/vim-prettier'
+Plug 'romainl/vim-cool' "disables search highlights
 
 call plug#end()
 
@@ -48,15 +54,12 @@ noremap <silent> <leader><leader> :FZF<CR>
 """"""""""""""""""""""""""""""
 let g:user_emmet_leader_key=","
 
-"COC Navigate with tab
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-let g:auto_sava = 0
+let g:auto_save = 0
 let g:auto_save_write_all_buffers = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeShowHidden = 1
 let NERDTreeAutoDeleteBuffer = 1
+let g:NERDTreeIgnore = ['^node_modules$']
 
 "Persistent_undo feature.
 if has('persistent_undo')
@@ -72,7 +75,34 @@ if has('persistent_undo')
     " finally, enable undo persistence.
     set undofile
 endif
+
+"""""""""""" COC CONFIGURATION""""""""""""""""""""
+"COC Navigate with tab
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 """""""""""" SET MOUSE ISSUE""""""""""""""""""""
+"SETTING MOUSE FUNCTIONALITY ON VIM
+set mouse=nicr
 set ttymouse=sgr
 
 "Ignoring useless files for wildmenu
